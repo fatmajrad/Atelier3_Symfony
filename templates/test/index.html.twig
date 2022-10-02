@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/Users/Fattouma PC/FirstProject/src/Controller/TestController.php'|file_link(0) }}">src/Controller/TestController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/Users/Fattouma PC/FirstProject/templates/test/index.html.twig'|file_link(0) }}">templates/test/index.html.twig</a></code></li>
+    </ul>
+</div>
+{{valeur1}}
+
+{% set tab  ={
+    'fname':"name",
+    'lname':"Doe"
+}%}
+{{tab['fname']}}
+{% for n in tab %}
+<li>{{n}}</li>
+{% endfor %}
+{% set v='amazing Fatma' %}
+{{v}}
+
+<hr>
+<hr>
+{% if p is empty %}
+<p> table empty</p>
+{% else %}
+<table border="1">
+<tr>
+<td> id </td>
+<td> nom </td>
+<td> email </td>
+</tr>
+
+{% for person  in p %}
+<tr>
+<td> {{person.id}} </td>
+<td> {{person.nom | upper}} </td>
+<td> {{person.email}} </td>
+</tr>
+{% endfor %}
+
+</table>
+<hr>
+{% endif %}
+{% apply lower %}
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+{% endapply %}
+
+<a href={{path('app_teacher',{'name':'Fatma'})}}>Go to teacher</a>
+{% endblock %}
+

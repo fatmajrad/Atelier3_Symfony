@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+{% block title %}Hello FormationController!{% endblock %}
+{% block body %}
+<h3>1-</h3>
+<table>
+<table border="1">
+<tr>
+<td> id </td>
+<td> nom </td>
+<td> email </td>
+</tr>
+
+{% for f  in formations %}
+<tr>
+<td> {{f.ref}} </td>
+<td> {{f.Titre | upper}} </td>
+<td> {{f.Description}} </td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>2-</h3>
+<table border="1">
+<tr>
+  <th>Ref</th>
+  <th>Titre</th>
+  <th>Description</th>
+  <th>date_debut</th>
+  <th>date_fin</th> 
+  <th>nb_participants</th> 
+</tr>
+{% for f in formations %}
+<tr>
+    <td>{{ f.ref }}</td>
+    <td>{{ f.Titre|upper }}</td>
+    <td>{{ f.Description }}</td>
+    <td>{{ f.date_debut}}</td>   
+    <td>{{ f.date_fin}}</td>
+    <td>{{ f.nb_participants}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>3-</h3>
+<table border="1">
+<tr>
+  <th>Ref</th>
+  <th>Titre</th>
+  <th>Description</th>
+  <th>date_debut</th>
+  <th>date_fin</th> 
+  <th>nb_participants</th> 
+</tr>
+{% for f in formations %}
+<tr>
+    <td>{{ f.ref }}</td>
+    <td>{{ f.Titre|upper }}</td>
+    <td>{{ f.Description }}</td>
+    <td>{{ f.date_debut}}</td>
+    <td>{{ f.date_fin}}</td>
+    <td>{{ f.nb_participants}}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>4-</h3>
+{{formations|length}}
+
+<br/>
+<h3>5-</h3>
+{% set ch = 'formation theorique' %}     
+  {% for f in formations %}
+    {% if f.Description == ch %}
+    Titre : {{f.Titre}}/
+       
+    {% endif %}
+  {% endfor %}
+
+<br/>
+<h3>6-</h3>
+  {% set nbMax = formations[0].nb_participants %}  
+  {% set ref = formations[0].ref %}  
+  {% for f in formations %}
+       {% if f.nb_participants >=  nbMax %}
+            {% set nbMax = f.nb_participants %}
+            {% set ref = f.ref %} 
+       {% endif %}
+  {% endfor %}
+
+
+ 
+  <table border="1">
+  <tr>
+    <th> Ref</th>
+    <th>Titre</th>
+    <th>Description</th>
+    <th>date_debut</th>
+    <th>date_fin</th> 
+    <th>nb_participants</th> 
+  </tr>
+  {% for f in formations %}
+    {% if f.ref == ref %}
+       <tr>
+         <td> {{f.ref}}</td>
+         <td> {{f.Titre}}</td>
+         <td> {{f.Description}}</td>
+         <td>{{f.date_debut}}</td>
+         <td>{{f.date_fin}}</td>
+         <td>{{f.nb_participants}}</td>
+        </tr>
+    {% endif %}
+  {% endfor %}
+</table>
+
+<br/>
+<h3>7- </h3>
+    {% set nbP = 0 %}  
+    {% for f in formations %}
+         {% set nbP = nbP + f.nb_participants %}
+    {% endfor %}
+    le nombre total est {{nbP}}
+
+<br/>
+<h3>8- </h3>
+
+   {% if formations is empty %}
+        Pas d'elements
+   {% endif %}
+
+<br/>
+<h3> 9-</h3>
+<table border="1">
+  <tr>
+    <th> Ref</th>
+    <th>Titre</th>
+    <th>Description</th>
+    <th>date_debut</th>
+    <th>date_fin</th> 
+    <th>nb_participants</th> 
+   
+  </tr>
+  {% for f in formations %}
+    <tr>
+      <td> {{f.ref}}</td>
+      <td> {{f.Titre}}</td>
+      <td> {{f.Description}}</td>
+      <td>{{f.date_debut}}</td>
+      <td>{{f.date_fin}}</td>
+      {% if f.nb_participants == 0 %}
+        <td><a href="{{path('/detail_formation', {'titre': f.Titre}) }}"> <input type="button" value="Participer" /></a><td>
+      {% else %}
+          <td>{{f.nb_participants}}</td>
+      {% endif %}
+    </tr>
+ {% endfor %}
+</table>
+
+<br/>
+{% endblock %}
